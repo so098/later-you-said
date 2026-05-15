@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "later-you-said",
+    "name": "나중에본다며",
     "slug": "later-you-said",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/icon.png"
     },
     "android": {
       "adaptiveIcon": {
