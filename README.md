@@ -16,6 +16,19 @@
 
 이 두 가설을 검증하기 위해 필요한 최소 기능만 구현했습니다.
 
+## 화면
+
+<p align="center">
+  <img src="assets/screenshots/01-home-empty.png" width="220" alt="빈 상태 홈" />
+  <img src="assets/screenshots/02-add-item.png" width="220" alt="카드 추가" />
+  <img src="assets/screenshots/03-home-with-items.png" width="220" alt="카드 목록" />
+  <img src="assets/screenshots/04-profile-backup.png" width="220" alt="백업·내보내기" />
+</p>
+
+<p align="center">
+  <sub>빈 상태 홈 · 카드 추가 · 카드 목록 · 백업·내보내기</sub>
+</p>
+
 ## 주요 기능
 
 - 카드 등록 시 카테고리·소요 시간·압박 강도·알림 시각을 한 화면에서 입력
