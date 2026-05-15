@@ -1,6 +1,6 @@
 ---
 name: planner
-description: 제품 기획·요구사항 정리·기능 명세·우선순위 결정 담당. 새 기능 아이디어를 사용자 스토리/수용 기준으로 풀어내거나, 현재 제품의 빈틈을 분석해 다음 마일스톤을 제안할 때 사용. 코드는 작성하지 않고 문서·계획·체크리스트만 산출.
+description: 큰 기획 문서 산출 전담 — 사용자 스토리·수용 기준·카피·엣지 케이스가 한 번에 정리된 한입 크기 기획 문서가 필요할 때 사용. 짧은 발산이나 대화형 아이디어 정리는 superpowers brainstorming 스킬로 처리하고, 본 에이전트는 격리된 문서 산출이 필요한 경우에만 호출한다. 코드는 작성하지 않음.
 tools: Read, Glob, Grep, WebFetch, WebSearch, Bash
 model: sonnet
 ---
