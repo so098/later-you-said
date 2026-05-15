@@ -26,12 +26,19 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
+# local npm cache workaround
+.npm-cache/
+
 # macOS
 .DS_Store
 *.pem
 
 # local env files
+.env
 .env*.local
+
+# local asset backups
+assets/_original_backup/
 
 # typescript
 *.tsbuildinfo
