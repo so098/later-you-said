@@ -22,12 +22,6 @@ const supabase = isSupabaseConfigured
 
 let supabaseDisabled = !isSupabaseConfigured;
 
-if (__DEV__ && !isSupabaseConfigured) {
-  console.log(
-    "[mock-analytics] supabase 미설정 — 모든 이벤트는 콘솔로만 흐른다",
-  );
-}
-
 export async function getAnonymousId() {
   const storedId = await AsyncStorage.getItem(STORAGE_KEYS.anonymousId);
 
@@ -44,10 +38,6 @@ export async function trackEvent(
   eventName: string,
   properties: Record<string, unknown> = {},
 ) {
-  if (__DEV__) {
-    console.log("[mock-analytics]", eventName, properties);
-  }
-
   if (!supabase || supabaseDisabled) {
     return;
   }
@@ -62,14 +52,14 @@ export async function trackEvent(
 
     if (error) {
       console.warn(
-        "[analytics] supabase 응답 에러 — 이후 이벤트는 mock 모드로 흐른다",
+        "[analytics] supabase 응답 에러 — 이후 이벤트 전송은 스킵된다",
         error.message,
       );
       supabaseDisabled = true;
     }
   } catch (error) {
     console.warn(
-      "[analytics] supabase 요청 실패 — 이후 이벤트는 mock 모드로 흐른다",
+      "[analytics] supabase 요청 실패 — 이후 이벤트 전송은 스킵된다",
       error,
     );
     supabaseDisabled = true;

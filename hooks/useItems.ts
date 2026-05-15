@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { SavedItem } from "../types/item";
-import { seedItems } from "../constants/reminders";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { trackEvent } from "../lib/analytics";
 
 export function useItems() {
-  const [items, setItems] = useState<SavedItem[]>(seedItems);
+  const [items, setItems] = useState<SavedItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {

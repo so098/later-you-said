@@ -1,9 +1,5 @@
 import { Alert, Platform } from "react-native";
 import * as Notifications from "expo-notifications";
-import { seedItems } from "../constants/reminders";
-
-const mainReminder = seedItems[0];
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldPlaySound: true,
@@ -16,7 +12,7 @@ Notifications.setNotificationHandler({
 export async function scheduleTestNotification() {
   try {
     const title = "나중에 본다며";
-    const body = `${mainReminder.pressure} · ${mainReminder.meta}`;
+    const body = "저장만 해놓고 도망간 거, 이제 볼 시간.";
 
     if (Platform.OS === "web") {
       if (!("Notification" in globalThis)) {
@@ -59,7 +55,7 @@ export async function scheduleTestNotification() {
       content: {
         title,
         body,
-        data: { itemId: mainReminder.id },
+        data: { source: "dev-test" },
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
