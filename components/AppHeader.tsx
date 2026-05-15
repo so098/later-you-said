@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors, radius, spacing, typography } from "../styles/tokens";
+import { AlarmClockIcon } from "./AlarmClockIcon";
 
 type Props = {
   isDevelopment: boolean;
@@ -13,15 +14,13 @@ export function AppHeader({ isDevelopment, onAlarmPress }: Props) {
         <Text style={styles.logoText}>나중에본다며..</Text>
         <Text style={styles.logoStar}>★</Text>
       </View>
-      {isDevelopment ? (
-        <TouchableOpacity
-          style={styles.alarmButton}
-          activeOpacity={0.8}
-          onPress={onAlarmPress}
-        >
-          <Text style={styles.alarmButtonText}>3초</Text>
-        </TouchableOpacity>
-      ) : null}
+      <TouchableOpacity
+        style={styles.alarmButton}
+        activeOpacity={0.8}
+        onPress={isDevelopment ? onAlarmPress : undefined}
+      >
+        <AlarmClockIcon variant="header" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -59,10 +58,5 @@ const styles = StyleSheet.create({
     height: 42,
     justifyContent: "center",
     width: 42,
-  },
-  alarmButtonText: {
-    color: colors.textPrimary,
-    fontSize: 12,
-    fontWeight: "600",
   },
 });

@@ -44,24 +44,43 @@ export async function scheduleTestNotification() {
       });
     }
 
-    const { status } = await Notifications.requestPermissionsAsync();
+    const currentPermission = await Notifications.getPermissionsAsync();
+    const finalPermission = currentPermission.granted
+      ? currentPermission
+      : await Notifications.requestPermissionsAsync({
+          ios: {
+            allowAlert: true,
+            allowBadge: true,
+            allowSound: true,
+          },
+        });
 
-    if (status !== "granted") {
+    if (!finalPermission.granted) {
       Alert.alert("알림 권한이 꺼져 있어", "기기 설정에서 알림 권한을 허용해줘.");
       return;
     }
 
-    await Notifications.scheduleNotificationAsync({
+    const notificationId = await Notifications.scheduleNotificationAsync({
       content: {
         title,
         body,
+        sound: "default",
+        interruptionLevel: "active",
         data: { source: "dev-test" },
       },
       trigger: {
-        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-        seconds: 3,
+        type: Notifications.SchedulableTriggerInputTypes.DATE,
+        date: new Date(Date.now() + 3000),
       },
     });
+
+    const scheduledNotifications =
+      await Notifications.getAllScheduledNotificationsAsync();
+
+    Alert.alert(
+      "3초 알림 예약됨",
+      `예약 ID: ${notificationId}\n대기 중인 알림: ${scheduledNotifications.length}개\n앱을 잠깐 백그라운드로 보내고 기다려봐.`,
+    );
   } catch (error) {
     console.error(error);
     Alert.alert(
