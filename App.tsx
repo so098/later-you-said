@@ -65,6 +65,7 @@ export default function App() {
     today,
     isReminderPickerOpen,
     setIsReminderPickerOpen,
+    resetReminderPicker,
     viewYear,
     viewMonth,
     pickerYear,
@@ -76,15 +77,27 @@ export default function App() {
     setPickerMinute,
     pickerRepeat,
     setPickerRepeat,
+    frequentDuration,
+    setFrequentDuration,
+    isFrequentDurationOpen,
+    setIsFrequentDurationOpen,
     goToPrevMonth,
     goToNextMonth,
     selectDay,
     calendarDays,
     buildReminderLabel,
+    isTimePicked,
   } = useReminderPicker();
 
+  const openReminderPicker = () => {
+    resetReminderPicker();
+    setIsReminderPickerOpen(true);
+  };
+
   const confirmCustomReminder = () => {
-    setNewItem((prev) => ({ ...prev, reminder: buildReminderLabel() }));
+    const label = buildReminderLabel();
+    if (label === null) return;
+    setNewItem((prev) => ({ ...prev, reminder: label }));
     setIsReminderPickerOpen(false);
   };
 
@@ -192,6 +205,7 @@ export default function App() {
             setNewItem={setNewItem}
             isCustomReminder={isCustomReminder}
             isReminderPickerOpen={isReminderPickerOpen}
+            onOpenReminderPicker={openReminderPicker}
             setIsReminderPickerOpen={setIsReminderPickerOpen}
             onClose={closeAddForm}
             onSubmit={() => addItem(newItem, editingItemId, closeAddForm)}
@@ -222,10 +236,15 @@ export default function App() {
           setPickerMinute={setPickerMinute}
           pickerRepeat={pickerRepeat}
           setPickerRepeat={setPickerRepeat}
+          frequentDuration={frequentDuration}
+          setFrequentDuration={setFrequentDuration}
+          isFrequentDurationOpen={isFrequentDurationOpen}
+          setIsFrequentDurationOpen={setIsFrequentDurationOpen}
           goToPrevMonth={goToPrevMonth}
           goToNextMonth={goToNextMonth}
           selectDay={selectDay}
           calendarDays={calendarDays}
+          isTimePicked={isTimePicked}
         />
       </View>
     </SafeAreaView>

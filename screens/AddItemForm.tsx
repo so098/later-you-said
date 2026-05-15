@@ -18,6 +18,7 @@ type Props = {
   setNewItem: React.Dispatch<React.SetStateAction<NewItemDraft>>;
   isCustomReminder: boolean;
   isReminderPickerOpen: boolean;
+  onOpenReminderPicker: () => void;
   setIsReminderPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onClose: () => void;
   onSubmit: () => void;
@@ -29,6 +30,7 @@ export function AddItemForm({
   setNewItem,
   isCustomReminder,
   isReminderPickerOpen,
+  onOpenReminderPicker,
   setIsReminderPickerOpen,
   onClose,
   onSubmit,
@@ -104,7 +106,7 @@ export function AddItemForm({
           <View style={styles.addPageChipRow}>
             {reminderPresets.map((reminder) => {
               const isActive =
-                reminder === "직접 선택"
+                reminder === "직접 입력"
                   ? isCustomReminder || isReminderPickerOpen
                   : newItem.reminder === reminder;
               return (
@@ -116,8 +118,8 @@ export function AddItemForm({
                   ]}
                   activeOpacity={0.8}
                   onPress={() => {
-                    if (reminder === "직접 선택") {
-                      setIsReminderPickerOpen((prev) => !prev);
+                    if (reminder === "직접 입력") {
+                      onOpenReminderPicker();
                     } else {
                       setNewItem((prev) => ({ ...prev, reminder }));
                       setIsReminderPickerOpen(false);
@@ -130,7 +132,7 @@ export function AddItemForm({
                       isActive && styles.addPageChipTextActive,
                     ]}
                   >
-                    {reminder === "직접 선택" && isCustomReminder
+                    {reminder === "직접 입력" && isCustomReminder
                       ? newItem.reminder
                       : reminder}
                   </Text>

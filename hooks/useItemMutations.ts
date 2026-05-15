@@ -29,7 +29,7 @@ export function useItemMutations(
       category: draft.category,
       meta: draft.meta.trim() || "15분 · 오늘 필요",
       pressure: draft.pressure.trim() || "저장했으면 한 번은 봐야지",
-      reminder: draft.reminder.trim() || "오늘 밤 9:00",
+      reminder: draft.reminder.trim() || "직접 입력",
     };
 
     if (editingItemId !== null) {
