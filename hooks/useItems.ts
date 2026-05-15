@@ -4,6 +4,15 @@ import { SavedItem } from "../types/item";
 import { STORAGE_KEYS } from "../constants/storageKeys";
 import { trackEvent } from "../lib/analytics";
 
+const legacyMockTitles = new Set([
+  "React Query 캐싱 전략 정리",
+  "포트폴리오 모바일 UX 레퍼런스",
+]);
+
+function removeLegacyMockItems(items: SavedItem[]) {
+  return items.filter((item) => !legacyMockTitles.has(item.title));
+}
+
 export function useItems() {
   const [items, setItems] = useState<SavedItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -17,7 +26,15 @@ export function useItems() {
           const parsedItems: unknown = JSON.parse(storedItems);
 
           if (Array.isArray(parsedItems)) {
-            setItems(parsedItems as SavedItem[]);
+            const cleanedItems = removeLegacyMockItems(parsedItems as SavedItem[]);
+            setItems(cleanedItems);
+
+            if (cleanedItems.length !== parsedItems.length) {
+              await AsyncStorage.setItem(
+                STORAGE_KEYS.items,
+                JSON.stringify(cleanedItems),
+              );
+            }
           }
         }
 
